@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80" fill="none">
+  <!-- TVS wordmark: bold italic slab-serif style matching TVS Motor identity -->
+  <text
+    x="10" y="66"
+    font-family="Arial Black, Impact, sans-serif"
+    font-weight="900"
+    font-style="italic"
+    font-size="72"
+    fill="white"
+    letter-spacing="-2"
+  >TVS</text>
+</svg>
