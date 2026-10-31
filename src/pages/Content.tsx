@@ -1,45 +1,15 @@
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import SectionHeader from '@/components/SectionHeader';
 import CTAForm from '@/components/CTAForm';
 import BrandIcon from '@/components/BrandIcon';
 import Reveal from '@/components/Reveal';
 import PageHero from '@/components/PageHero';
-import { ProgramCard } from '@/components/ProgramCard';
-import { programs as programsData } from '@/content/programs';
+import { Section, CaseStudyCard } from '@/components/Blocks';
 import { contentFormats as formatsData } from '@/content/content-formats';
-import type { Program, ContentFormat } from '@/lib/types';
+import { caseStudies } from '@/content/case-studies';
+import { site } from '@/content/site';
+import type { ContentFormat } from '@/lib/types';
 import { X, Play, ChevronRight } from 'lucide-react';
-
-const whatWeOffer = [
-  {
-    title: 'Content Design',
-    icon: 'content',
-    accent: 'crimson' as const,
-    desc: 'Custom content in every L&D format.',
-    cta: 'See formats →',
-    href: '#content-design',
-    shadow: 'shadow-hard-crimson card-lift',
-  },
-  {
-    title: 'Content Delivery',
-    icon: 'platform-delivery',
-    accent: 'sky' as const,
-    desc: 'Trainers in 20+ Indian cities. ILT, OJT, virtual, digital.',
-    cta: 'See coverage →',
-    href: '#content-delivery',
-    shadow: 'shadow-hard-sky card-lift',
-  },
-  {
-    title: 'Program Library',
-    icon: 'frameworks',
-    accent: 'moss' as const,
-    desc: 'Nine programs ready to run. Book them off the shelf.',
-    cta: 'Browse →',
-    href: '#program-library',
-    shadow: 'shadow-hard-moss card-lift',
-  },
-];
 
 const deliveryFormats = [
   { title: 'Instructor-led (ILT)', icon: 'delivery-ilt', desc: 'Best for complex topics, new product launches, real-time practice.' },
@@ -184,7 +154,9 @@ function FormatModal({ fmt, onClose }: { fmt: ContentFormat; onClose: () => void
 }
 
 export default function Content() {
-  const programs: Program[] = programsData.filter((p) => p.published);
+  const work = caseStudies
+    .filter((c) => c.uses?.includes('content') && (c.status === 'live' || site.showPlaceholders))
+    .slice(0, 3);
   const formats: ContentFormat[] = formatsData.filter((f) => f.published);
   const [activeFormat, setActiveFormat] = useState<ContentFormat | null>(null);
 
@@ -195,42 +167,22 @@ export default function Content() {
       )}
 
       <PageHero
-        eyebrow="CONTENT"
-        title={<>Learning content, designed and delivered.</>}
-        subtitle="Design in every format. Delivery through trainers in 20+ cities. Nine ready-to-deploy programs in the library."
-        ctaLabel="See content samples →"
+        eyebrow="CONTENT & DELIVERY"
+        title={<>Content your frontline will actually use. Delivered by our own trainers.</>}
+        subtitle="Custom learning content in every format, and a trainer network across 20+ Indian cities to take it to the floor."
+        ctaLabel="See the formats ↓"
         ctaTo="#content-design"
         image="/hero-content.webp"
         imageAlt="Learning content formats"
-        accent="sky"
+        accent="crimson"
       />
 
-      {/* Section 2 — What we offer */}
-      <section className="bg-white py-12 md:py-16">
+      {/* 01 — Content */}
+      <section id="content-design" className="bg-white py-12 md:py-16">
         <div className="wrap">
-          <SectionHeader eyebrow="WHAT WE OFFER" />
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-            {whatWeOffer.map((card, i) => (
-              <Reveal key={card.title} delay={i * 80}>
-                <div className={`bg-paper border-2 border-navy ${card.shadow} p-5 md:p-6 flex flex-col h-full`}>
-                  <BrandIcon name={card.icon} accent={card.accent} className="w-10 h-10 md:w-12 md:h-12 mb-3 md:mb-4" />
-                  <h3 className="font-grotesk font-bold text-navy t-xl uppercase mb-2 md:mb-3">{card.title}</h3>
-                  <p className="text-navy/80 t-base leading-relaxed mb-4 md:mb-5 flex-1">{card.desc}</p>
-                  <a href={card.href} className="font-grotesk font-bold text-navy t-sm2 uppercase tracking-[0.06em] hover:text-crimson transition-colors">
-                    {card.cta}
-                  </a>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section 3 — Content Design */}
-      <section id="content-design" className="bg-paper py-12 md:py-16">
-        <div className="wrap">
-          <SectionHeader eyebrow="01 / CONTENT DESIGN" />
-          <p className="text-navy/60 t-sm2 mb-4 md:mb-6">Click a format to see a sample.</p>
+          <span className="eyebrow">01 / CONTENT</span>
+          <h2 className="font-grotesk font-bold text-navy t-2xl leading-[1.15] mt-2 mb-2">What we make</h2>
+          <p className="text-navy/70 t-base mb-6 md:mb-8">Role-specific, contextual, easy to consume and easy to apply. Click a format to see a sample.</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
             {formats.map((fmt, i) => (
               <Reveal key={fmt.slug} delay={i * 50}>
@@ -252,83 +204,66 @@ export default function Content() {
               </Reveal>
             ))}
           </div>
-          <Reveal delay={200}>
-            <blockquote className="mt-6 md:mt-8 border-l-[4px] border-crimson pl-4 md:pl-6 max-w-[720px]">
-              <p className="font-grotesk font-semibold text-navy t-2xl leading-snug">
-                "Role-specific. Contextual. Easy to consume. Easy to apply."
-              </p>
-            </blockquote>
-          </Reveal>
-        </div>
-      </section>
 
-      {/* Section 4 — Content Delivery */}
-      <section id="content-delivery" className="bg-white py-12 md:py-16">
-        <div className="wrap">
-          <SectionHeader eyebrow="02 / CONTENT DELIVERY" />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-8 md:mb-12">
-            {deliveryFormats.map((f, i) => (
-              <Reveal key={f.title} delay={i * 60}>
-                <div className="border-2 border-navy bg-paper p-4 md:p-5 flex flex-col h-full hover:-translate-y-1 transition-transform">
-                  <BrandIcon name={f.icon} accent="crimson" className="w-8 h-8 md:w-10 md:h-10 mb-2 md:mb-3" />
-                  <h4 className="font-grotesk font-bold text-navy t-lg mb-1 md:mb-2">{f.title}</h4>
-                  <p className="text-navy/75 t-sm2 leading-relaxed">{f.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <h3 className="font-grotesk font-bold text-navy t-xl uppercase mb-3 md:mb-4">Delivery Edge</h3>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 mb-8 md:mb-12">
-            {deliveryEdge.map((e, i) => (
-              <Reveal key={e.title} delay={i * 80}>
-                <div className="border-2 border-navy bg-paper p-5 md:p-6 flex flex-col h-full hover:-translate-y-1 transition-transform">
-                  <BrandIcon name={e.icon} accent="sky" className="w-10 h-10 md:w-12 md:h-12 mb-3 md:mb-4" />
-                  <h4 className="font-grotesk font-bold text-navy t-lg mb-2 md:mb-3">{e.title}</h4>
-                  <p className="text-navy/75 t-sm2 leading-relaxed">{e.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5 — Program Library */}
-      <section id="program-library" className="bg-paper py-12 md:py-16">
-        <div className="wrap">
-          <SectionHeader eyebrow="03 / PROGRAM LIBRARY" />
-          <p className="text-navy/70 t-sm2 -mt-3 mb-5">Three of our {programs.length} ready-to-run programs. <Link to="/programs" className="lt-link ml-1">See the full library →</Link></p>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-            {programs.slice(0, 3).map((program, i) => (
-              <Reveal key={program.slug} delay={i * 60}>
-                <ProgramCard program={program} index={i} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section 6 — How we work with SMEs */}
-      <section className="bg-navy py-12 md:py-16">
-        <div className="wrap">
-          <SectionHeader eyebrow="HOW WE WORK WITH SMES" />
-          <div className="grid sm:grid-cols-3 gap-4 md:gap-5">
+          <div className="mt-6 md:mt-8 border-2 border-navy/15 bg-paper p-4 md:p-5 grid md:grid-cols-[auto_1fr_1fr_1fr] gap-4 md:gap-6 md:items-center">
+            <span className="font-grotesk font-bold t-xs uppercase tracking-[0.12em] text-navy/50">How we build it</span>
             {smeSteps.map((step, i) => (
-              <Reveal key={step.title} delay={i * 100}>
-                <div className="bg-white border-2 border-white p-5 md:p-6 flex flex-col h-full">
-                  <BrandIcon name={step.icon} accent="moss" className="w-10 h-10 md:w-12 md:h-12 mb-3 md:mb-4" />
-                  <div className="font-grotesk font-bold text-crimson t-3xl leading-none mb-3 md:mb-4">
-                    {String(i + 1).padStart(2, '0')}
-                  </div>
-                  <h4 className="font-grotesk font-bold text-navy t-lg uppercase mb-2 md:mb-3">{step.title}</h4>
-                  <p className="text-navy/75 t-sm2 leading-relaxed">{step.desc}</p>
-                </div>
-              </Reveal>
+              <div key={step.title} className="flex gap-3">
+                <span className="font-grotesk font-bold text-crimson t-lg leading-none">{String(i + 1).padStart(2, '0')}</span>
+                <span>
+                  <span className="block font-grotesk font-bold text-navy t-sm2 uppercase tracking-[0.04em]">{step.title}</span>
+                  <span className="block text-navy/70 t-sm2 leading-snug mt-0.5">{step.desc}</span>
+                </span>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Section 7 — Request a sample */}
+      {/* 02 — Delivery */}
+      <section id="content-delivery" className="bg-paper py-12 md:py-16">
+        <div className="wrap">
+          <span className="eyebrow">02 / DELIVERY</span>
+          <h2 className="font-grotesk font-bold text-navy t-2xl leading-[1.15] mt-2 mb-2">How we take it to the floor</h2>
+          <p className="text-navy/70 t-base mb-6 md:mb-8">Our own trainers, across 20+ cities, in whichever mode fits the audience.</p>
+          <div className="grid md:grid-cols-[1.4fr_1fr] gap-4 md:gap-5">
+            <div className="grid grid-cols-2 gap-2 md:gap-3">
+              {deliveryFormats.map((f) => (
+                <div key={f.title} className="lt-card !p-4 flex gap-3">
+                  <BrandIcon name={f.icon} accent="crimson" className="w-8 h-8 shrink-0" />
+                  <span>
+                    <span className="block font-grotesk font-bold text-navy t-base leading-snug">{f.title}</span>
+                    <span className="block text-navy/70 t-sm2 leading-snug mt-1">{f.desc}</span>
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="bg-navy text-white border-2 border-navy p-5 md:p-6">
+              <span className="font-grotesk font-bold t-xs uppercase tracking-[0.12em] text-sky">Why it runs smoothly</span>
+              <ul className="flex flex-col gap-4 mt-4">
+                {deliveryEdge.map((e) => (
+                  <li key={e.title}>
+                    <span className="block font-grotesk font-bold t-base">{e.title}</span>
+                    <span className="block text-white/75 t-sm2 leading-snug mt-0.5">{e.desc}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {work.length > 0 && (
+        <Section eyebrow="IN OUR WORK" title="Where our content is working" tone="white" action={{ label: 'All our work', to: '/work' }}>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {work.map((c, i) => (
+              <CaseStudyCard key={c.slug} c={c} index={i} />
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {/* Request a sample */}
       <section id="request-sample" className="bg-paper py-12 md:py-16">
         <div className="wrap">
           <SectionHeader eyebrow="REQUEST A SAMPLE" />

@@ -1,11 +1,10 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import Placeholder from '@/components/Placeholder';
 import NotFound from '@/pages/NotFound';
-import { Section, CaseStudyCard, BookCallBand } from '@/components/Blocks';
+import { Section, CaseStudyCard, BookCallBand, PillarChip, usesToChips } from '@/components/Blocks';
 import { caseStudies } from '@/content/case-studies';
-import { solutions } from '@/content/solutions';
 import { site } from '@/content/site';
 
 // Standard case study template for /work/<slug>.
@@ -14,7 +13,7 @@ export default function CaseStudyDetail() {
   const c = caseStudies.find((x) => x.slug === slug);
   if (!c || (c.status === 'draft' && !site.showPlaceholders)) return <NotFound />;
 
-  const related = solutions.filter((s) => s.published && c.solutions?.includes(s.slug));
+  const used = usesToChips(c.uses);
   const more = caseStudies.filter((x) => x.slug !== c.slug && x.status === 'live').slice(0, 3);
 
   return (
@@ -72,13 +71,11 @@ export default function CaseStudyDetail() {
         )}
       </Section>
 
-      {related.length > 0 && (
-        <Section eyebrow="RELATED SOLUTIONS" tone="white">
+      {used.length > 0 && (
+        <Section eyebrow="WHAT WE USED" tone="white">
           <div className="flex flex-wrap gap-2">
-            {related.map((s) => (
-              <Link key={s.slug} to={`/solutions/${s.slug}`} className="lt-tag !text-navy hover:!border-navy">
-                {s.title} →
-              </Link>
+            {used.map((u) => (
+              <PillarChip key={u.to} {...u} />
             ))}
           </div>
         </Section>
