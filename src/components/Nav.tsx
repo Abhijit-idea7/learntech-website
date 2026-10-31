@@ -8,7 +8,7 @@ import { blogPosts } from '@/content/blog-posts';
 const showInsights = blogPosts.filter((p) => p.published).length >= site.insightsMinPostsForNav;
 
 const navLinks = [
-  { label: 'Solutions', to: '/solutions' },
+  { label: 'Content & Delivery', to: '/content' },
   { label: 'Platforms', to: '/platforms' },
   { label: 'Programs', to: '/programs' },
   { label: 'Our Work', to: '/work' },

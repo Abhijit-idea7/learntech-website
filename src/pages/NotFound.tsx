@@ -11,9 +11,9 @@ export default function NotFound() {
         </p>
         <div className="flex flex-wrap gap-3">
           <Link to="/" className="btn-primary">Home →</Link>
-          <Link to="/consulting" className="btn-secondary">Consulting</Link>
-          <Link to="/content" className="btn-secondary">Content</Link>
+          <Link to="/content" className="btn-secondary">Content &amp; Delivery</Link>
           <Link to="/platforms" className="btn-secondary">Platforms</Link>
+          <Link to="/work" className="btn-secondary">Our Work</Link>
           <Link to="/contact" className="btn-secondary">Contact</Link>
         </div>
       </div>
