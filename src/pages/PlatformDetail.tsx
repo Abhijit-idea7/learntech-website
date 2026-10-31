@@ -1,13 +1,14 @@
 import { Link, useParams } from 'react-router-dom';
-import { Check, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { Check, ExternalLink, ArrowLeft } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import CTABand from '@/components/CTABand';
 import Reveal from '@/components/Reveal';
 import Placeholder from '@/components/Placeholder';
 import NotFound from '@/pages/NotFound';
-import { Section, SolutionCard } from '@/components/Blocks';
+import { Section, CaseStudyCard } from '@/components/Blocks';
 import { platforms } from '@/content/platforms';
-import { solutions } from '@/content/solutions';
+import { caseStudies } from '@/content/case-studies';
+import { site } from '@/content/site';
 
 function embedUrl(url: string): string | null {
   if (!url) return null;
@@ -25,8 +26,7 @@ export default function PlatformDetail() {
   if (!p) return <NotFound />;
 
   const video = embedUrl(p.video_url);
-  const usedIn = solutions.filter((s) => s.published && s.includes.platforms?.includes(p.slug));
-  const others = platforms.filter((x) => x.published && x.slug !== p.slug);
+  const work = caseStudies.filter((c) => c.uses?.includes(p.slug) && (c.status === 'live' || site.showPlaceholders));
 
   return (
     <>
@@ -110,11 +110,11 @@ export default function PlatformDetail() {
         )}
       </Section>
 
-      {usedIn.length > 0 && (
-        <Section eyebrow={`USED IN THESE SOLUTIONS`}>
+      {work.length > 0 && (
+        <Section eyebrow="WHERE IT'S WORKING" title={`${p.name} in our work`}>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-            {usedIn.map((s, i) => (
-              <SolutionCard key={s.slug} s={s} index={i} />
+            {work.map((c, i) => (
+              <CaseStudyCard key={c.slug} c={c} index={i} />
             ))}
           </div>
         </Section>
@@ -133,19 +133,11 @@ export default function PlatformDetail() {
         />
       </div>
 
-      <Section eyebrow="OTHER PLATFORMS" tone="white">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-          {others.map((o) => (
-            <Link key={o.slug} to={`/platforms/${o.slug}`} className="lt-card lt-card-link group flex flex-col h-full !p-4">
-              <span className="font-grotesk font-bold text-navy t-base flex justify-between gap-2">
-                {o.name}
-                <ArrowUpRight size={16} className="text-navy/40 group-hover:text-crimson" />
-              </span>
-              <span className="text-navy/65 t-sm2 mt-1 leading-snug">{o.tagline}</span>
-            </Link>
-          ))}
-        </div>
-      </Section>
+      <div className="wrap pb-12 md:pb-16">
+        <Link to="/platforms" className="lt-link inline-flex items-center gap-1.5">
+          <ArrowLeft size={14} /> All platforms
+        </Link>
+      </div>
     </>
   );
 }

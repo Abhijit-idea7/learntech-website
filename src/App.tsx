@@ -4,10 +4,6 @@ import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import useScrollTop from '@/hooks/useScrollTop';
 import Home from '@/pages/Home';
-import Solutions from '@/pages/Solutions';
-import SolutionDetail from '@/pages/SolutionDetail';
-import Consulting from '@/pages/Consulting';
-import ConsultingServicePage from '@/pages/ConsultingService';
 import Content from '@/pages/Content';
 import Platforms from '@/pages/Platforms';
 import PlatformDetail from '@/pages/PlatformDetail';
@@ -53,9 +49,6 @@ function App() {
       <Routes>
         <Route path="/" element={page(<Home />)} />
 
-        <Route path="/solutions" element={page(<Solutions />)} />
-        <Route path="/solutions/:slug" element={page(<SolutionDetail />)} />
-
         <Route path="/platforms" element={page(<Platforms />)} />
         <Route path="/platforms/:slug" element={page(<PlatformDetail />)} />
 
@@ -72,9 +65,6 @@ function App() {
         <Route path="/blog" element={<Navigate to="/insights" replace />} />
         <Route path="/blog/:slug" element={<BlogRedirect />} />
 
-        {/* capability pages, reached from Solutions and the footer */}
-        <Route path="/consulting" element={page(<Consulting />)} />
-        <Route path="/consulting/:sub" element={page(<ConsultingServicePage />)} />
         <Route path="/content" element={page(<Content />)} />
 
         <Route path="/about" element={page(<About />)} />
@@ -85,6 +75,10 @@ function App() {
         {/* old GoDaddy site addresses */}
         <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="/learning-content" element={<Navigate to="/content" replace />} />
+
+        {/* pages removed in the Oct 2026 simplification */}
+        <Route path="/solutions/*" element={<Navigate to="/" replace />} />
+        <Route path="/consulting/*" element={<Navigate to="/" replace />} />
         <Route path="/about-us" element={<Navigate to="/about" replace />} />
 
         <Route path="*" element={page(<NotFound />)} />

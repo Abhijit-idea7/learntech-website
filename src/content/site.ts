@@ -29,36 +29,6 @@ export const site = {
     { value: '', label: 'frontline learners trained' },
   ],
 
-  industries: [
-    {
-      name: 'Automotive OEMs & dealer networks',
-      desc: 'Sales, service and channel teams across primary and secondary networks.',
-      icon: 'car' as const,
-    },
-    {
-      name: 'Premium & jewellery retail',
-      desc: 'Store teams where every customer conversation carries the brand.',
-      icon: 'gem' as const,
-    },
-    {
-      name: 'Consumer durables',
-      desc: 'Distributor and retailer networks selling considered purchases.',
-      icon: 'plug' as const,
-    },
-    {
-      name: 'Any frontline-heavy business',
-      desc: 'If your people in front of the customer decide the outcome, we can help.',
-      icon: 'store' as const,
-    },
-  ],
-
-  whyUs: [
-    { title: 'Speed + substance', desc: 'Agility of a new agency, decades of L&D experience behind it.' },
-    { title: 'Proven frameworks', desc: 'Learner-centred design, 70:20:10 and onboarding best practice in every engagement.' },
-    { title: 'Platform-enabled delivery', desc: 'Our own platforms handle rollout, keep learners coming back and show what is working.' },
-    { title: 'Performance, not training', desc: 'We measure what changes on Monday: behaviour, confidence, consistency.' },
-  ],
-
   /** The Insights menu item appears once this many posts are published. */
   insightsMinPostsForNav: 5,
 };

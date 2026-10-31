@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom';
 import { site } from '@/content/site';
-import { solutions } from '@/content/solutions';
 import { platforms } from '@/content/platforms';
 import { blogPosts } from '@/content/blog-posts';
 
 const showInsights = blogPosts.filter((p) => p.published).length >= site.insightsMinPostsForNav;
 
+const whatWeDo = [
+  { label: 'Content & Delivery', to: '/content' },
+  { label: 'Platforms', to: '/platforms' },
+  { label: 'Programs', to: '/programs' },
+];
+
 const company = [
   { label: 'Our Work', to: '/work' },
-  { label: 'Programs', to: '/programs' },
-  { label: 'Consulting', to: '/consulting' },
-  { label: 'Content & delivery', to: '/content' },
   ...(showInsights ? [{ label: 'Insights', to: '/insights' }] : []),
   { label: 'About', to: '/about' },
   { label: 'Contact', to: '/contact' },
@@ -47,7 +49,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <Col heading="Solutions" links={solutions.filter((s) => s.published).map((s) => ({ label: s.title, to: `/solutions/${s.slug}` }))} />
+        <Col heading="What we do" links={whatWeDo} />
         <Col heading="Platforms" links={platforms.filter((p) => p.published).map((p) => ({ label: p.name, to: `/platforms/${p.slug}` }))} />
         <Col heading="Company" links={company} />
 

@@ -29,6 +29,28 @@ export const platforms: Platform[] = [
     "published": true
   },
   {
+    "slug": "smartcontent",
+    "name": "SmartContent",
+    "is_flagship": false,
+    "tagline": "Bite-sized interactive learning on a link or QR code. No app, no login.",
+    "description": "DRAFT: replace with your wording. Short, interactive HTML learning pieces that open on any phone from a link or QR code, so they reach people who never open an LMS. Each piece is tracked by LearnSense, our analytics layer, so you see who engaged, what they chose and where they struggled. Run them as daily challenges with points, streaks and leaderboards, in all major Indian languages.",
+    "key_capabilities": [
+      "Opens on any phone from a link or QR code",
+      "No app download, no login",
+      "Daily challenge hubs with points, streaks and leaderboards",
+      "LearnSense analytics on every interaction",
+      "Translation into all major Indian languages",
+      "Read-aloud for every screen"
+    ],
+    "video_url": "",
+    "icon": "mobile-micro",
+    "accent": "moss",
+    "shadow_color": "#647439",
+    "external_url": "",
+    "sort_order": 2,
+    "published": true
+  },
+  {
     "slug": "paperless-training",
     "name": "Paperless Training",
     "is_flagship": false,

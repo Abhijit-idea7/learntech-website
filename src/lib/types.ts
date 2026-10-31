@@ -123,27 +123,19 @@ export interface Platform {
 
 // ===== Added in the re-layout (Oct 2026) =====
 
-export interface Solution {
+/** A card in "Why clients come to us" on the home page. */
+export interface Reason {
   slug: string;
   title: string;
-  /** one line used on cards */
+  /** one line under the title */
   short: string;
-  /** hero sub-heading */
-  intro: string;
-  icon: 'launch' | 'network' | 'onboarding' | 'sales' | 'strategy';
-  hero_image: string;
-  /** signs the buyer recognises */
-  challenges: string[];
-  approach: { title: string; desc: string }[];
-  /** slugs from the other content files; shown as "what's included" */
-  includes: {
-    consulting?: string[];
-    formats?: string[];
-    platforms?: string[];
-    programs?: string[];
-  };
-  /** slugs from case-studies.ts */
-  work?: string[];
+  icon: 'launch' | 'network' | 'onboarding' | 'tech' | 'strategy';
+  /** 2-3 short points: what we actually do */
+  points: string[];
+  /** chips linking to how we execute it */
+  how: { pillar: 'content' | 'platforms' | 'programs' | 'talk'; label: string; to: string }[];
+  /** slug of a case study in case-studies.ts */
+  work?: string;
   published: boolean;
 }
 
@@ -160,7 +152,11 @@ export interface CaseStudy {
   image?: string;
   /** if set, the card links here instead of the standard case study template */
   href?: string;
-  solutions?: string[];
+  /**
+   * What we used, shown as chips on the case study and used by the filters on Our Work.
+   * Use 'content' for content & delivery, a platform slug (e.g. 'learning360') or a program slug.
+   */
+  uses?: string[];
   /** draft = shown only as a placeholder while placeholders are switched on */
   status: 'live' | 'draft';
 }

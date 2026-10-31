@@ -21,7 +21,7 @@ export default function Platforms() {
       <PageHero
         eyebrow="PLATFORMS"
         title={<>{list.length} L&amp;D platforms. Built by L&amp;D people. All in-house.</>}
-        subtitle="In-house tech built for how L&D actually runs at the frontline. Each one can run on its own or as part of a solution."
+        subtitle="In-house tech built for how L&D actually runs at the frontline. Use one on its own, or let us run it alongside our content and programs."
         ctaLabel="Request a demo →"
         ctaTo="#cta"
         image="/hero-platforms.webp"
@@ -68,7 +68,7 @@ export default function Platforms() {
 
       {others.length > 0 && (
         <Section eyebrow="THE OTHER PLATFORMS" title="Pick the one that fits the job">
-          <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
             {others.map((p, i) => (
               <Reveal key={p.slug} delay={i * 60}>
                 <Link to={`/platforms/${p.slug}`} className={`lt-card lt-card-link group border-t-[6px] ${accentBorder[p.accent] ?? 'border-t-crimson'} flex flex-col h-full`}>
@@ -84,19 +84,16 @@ export default function Platforms() {
                 </Link>
               </Reveal>
             ))}
+            <Reveal delay={others.length * 60}>
+              <a href="#cta" className="flex flex-col justify-center h-full border-2 border-dashed border-navy/40 p-5 md:p-6 hover:border-navy transition-colors">
+                <span className="eyebrow">CUSTOM BUILDS</span>
+                <span className="font-grotesk font-bold text-navy t-xl mt-2 mb-1.5">Need something the market doesn't sell?</span>
+                <span className="text-navy/70 t-sm2 leading-relaxed">We build custom L&amp;D tech. Tell us what you need →</span>
+              </a>
+            </Reveal>
           </div>
         </Section>
       )}
-
-      <Section tone="navy">
-        <div className="max-w-[680px] mx-auto text-center">
-          <span className="eyebrow !text-sky">CUSTOM BUILDS</span>
-          <p className="font-grotesk font-bold text-white t-2xl leading-[1.2] mt-3 mb-6">
-            Need something the market doesn't sell? We build custom L&amp;D tech. Three more platforms are in the pipeline.
-          </p>
-          <Link to="/contact" className="btn-nav-cta">Talk to us →</Link>
-        </div>
-      </Section>
 
       <div id="cta">
         <CTABand

@@ -1,6 +1,8 @@
 // "Our Work" case studies. Each one gets a page at /work/<slug> unless "href" points elsewhere.
 // status 'draft' = shown only as a "content needed" card while placeholders are on.
 // Name a client only where you have permission; otherwise describe them ("A premium jewellery brand").
+// uses = what we used: 'content' (content & delivery), or a platform / program slug. Drives the chips, the
+// "What we used" filter on Our Work, and the "Where it's working" block on each platform page.
 import type { CaseStudy } from '@/lib/types';
 
 export const caseStudies: CaseStudy[] = [
@@ -18,7 +20,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     image: '/hero-casestudy-tvs.webp',
     href: '/case-studies/tvs-learning360',
-    solutions: ['dealer-capability'],
+    uses: ['learning360', 'content'],
     status: 'live',
   },
   {
@@ -27,7 +29,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Automotive',
     title: 'AI role-play evaluation for a dealer sales excellence programme',
     summary: 'Content needed: problem, what we built, results.',
-    solutions: ['sales-excellence'],
+    uses: ['content'],
     status: 'draft',
   },
   {
@@ -36,7 +38,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Automotive',
     title: 'Launch training for a new EV line-up',
     summary: 'Content needed: problem, what we built, results.',
-    solutions: ['launch-training'],
+    uses: ['content', 'smartcontent'],
     status: 'draft',
   },
   {
@@ -45,7 +47,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Premium retail',
     title: 'Digital learning artefacts for store teams',
     summary: 'Content needed: problem, what we built, results.',
-    solutions: ['dealer-capability'],
+    uses: ['content', 'smartcontent'],
     status: 'draft',
   },
   {
@@ -54,7 +56,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Premium retail',
     title: 'An 11-competency self-assessment suite inside the client LMS',
     summary: 'Content needed: problem, what we built, results.',
-    solutions: ['ld-strategy-tech'],
+    uses: ['content'],
     status: 'draft',
   },
   {
@@ -63,7 +65,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Premium retail',
     title: 'A two-day induction built around the customer journey',
     summary: 'Content needed: problem, what we built, results.',
-    solutions: ['frontline-onboarding'],
+    uses: ['content'],
     status: 'draft',
   },
 ];
